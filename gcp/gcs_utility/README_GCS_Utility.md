@@ -14,5 +14,5 @@
 ### Sample Code:
 1. Print Bucket Lists and Blob lists
     ```shell
-    python gcs_app.py
+    python ~/gcp_utility/gcp/gcs_utility/gcs_app.py
     ```

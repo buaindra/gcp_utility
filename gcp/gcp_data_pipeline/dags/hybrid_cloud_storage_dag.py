@@ -28,7 +28,7 @@ with models.DAG(
 
 
 	# Transfer Data from Azure Blob Storage to Google Cloud Storage
-	start = EmptyOperator(	
+	start = DummyOperator(	
 		task_id = "start"
 	)
 	
@@ -43,6 +43,8 @@ with models.DAG(
 	transfer_files_azure_blob_to_gcs = AzureBlobStorageToGCSOperator(
 		task_id="transfer_files_azure_blob_to_gcs",
 		# AZURE arg
+        container_name=AZURE_CONTAINER_NAME,
+        blob_name=AZURE_BLOB_NAME,
 		file_path=GCP_OBJECT_NAME,
 		# GCP args
 		bucket_name=GCP_BUCKET_NAME,
@@ -53,7 +55,7 @@ with models.DAG(
 		impersonation_chain=None,
 	)
 	
-	end = EmptyOperator(
+	end = DummyOperator(
 		task_id = "end"
 	)
 	
