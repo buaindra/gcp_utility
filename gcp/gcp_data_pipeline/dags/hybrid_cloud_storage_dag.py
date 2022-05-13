@@ -52,8 +52,8 @@ with models.DAG(
 		filename=GCP_BUCKET_FILE_PATH,
 		gzip=False,
 		delegate_to=None,
-		impersonation_chain=None,
-	)
+		impersonation_chain=None
+    )
 	
 	end = DummyOperator(
 		task_id = "end"
