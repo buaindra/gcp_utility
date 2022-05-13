@@ -1,11 +1,5 @@
 # GCS Utility
 
-### Ref:
-1. Auth: https://cloud.google.com/storage/docs/authentication
-2. GCS: https://cloud.google.com/storage/docs/listing-buckets#storage-list-buckets-python
-3. Composer DAGs: https://cloud.google.com/composer/docs/how-to/using/writing-dags
-
-
 ### Pre-requisite:
 1. Install VENV and Activate it
     ```shell
