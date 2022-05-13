@@ -16,5 +16,8 @@
 5. Generate SAS to acces the blob for a specific period of time:
    ![image](https://user-images.githubusercontent.com/46111257/168252752-fbf73723-8e74-4669-87f8-53ab73f81502.png)
 
-6. 
+6. Get access key for that storage account:
+   ![image](https://user-images.githubusercontent.com/46111257/168287931-0a96b950-3f83-4f7d-ac2b-5e56f3153c58.png)
+
+7. 
     
