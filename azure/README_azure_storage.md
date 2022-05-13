@@ -12,5 +12,9 @@
 
 4. Now, Upload the blob into Container:
    ![image](https://user-images.githubusercontent.com/46111257/168250958-f2f58c6d-71bd-4f38-b9b2-0bf59d76ef46.png)
+   
+5. Generate SAS to acces the blob for a specific period of time:
+   ![image](https://user-images.githubusercontent.com/46111257/168252752-fbf73723-8e74-4669-87f8-53ab73f81502.png)
 
+6. 
     
