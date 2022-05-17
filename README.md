@@ -29,5 +29,15 @@ This repo is to learn GCP services easily
     ```
 3. Activate the python virtual environment:
     ```shell
+    #sudo apt-get install -y python3-venv
+    #python3 -m venv venv
     source venv/bin/activate
+    ```
+4. Install below packages inside the Virtual Environment:
+    ```shell
+    pip install google-api-python-client
+    pip install google-cloud-bigquery
+    pip install google-cloud-storage
+    pip install apache-beam[GCP]
+    pip install google-auth
     ```
