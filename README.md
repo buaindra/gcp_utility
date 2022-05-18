@@ -17,6 +17,9 @@ This repo is to learn GCP services easily
     gcloud services enable composer.googleapis.com \
     gcloud services enable dataflow.googleapis.com
     ```
+2. Provide below roles:
+    1. provide "dataflow Worker" role to the default project compute service account
+
 
 ### How to start
 1. First clone the code from git repo:
@@ -38,6 +41,6 @@ This repo is to learn GCP services easily
     pip install google-api-python-client
     pip install google-cloud-bigquery
     pip install google-cloud-storage
-    pip install apache-beam[GCP]
+    pip install apache-beam[gcp]
     pip install google-auth
     ```
