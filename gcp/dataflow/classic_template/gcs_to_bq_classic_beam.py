@@ -20,9 +20,15 @@ import argparse
 import logging
 
 
-def get_schema(bucket_nm, blob_nm):
+def get_schema(projectid: str, gcs_blob_path: str) -> str:
+    bucket_nm = gcs_blob_path.split("/")[2]
+    blob_nm = "/".join([str(item) for item in gcs_blob_path.split("/")[3:]])  # list comprehension
+    print(f"bucket name: {bucket_nm} and blob name: {blob_nm}")
     storage_client = storage.Client()
-    bucket = 
+    bucket = storage_client.get_bucket(bucket_nm)
+    blob = bucket.get_blob(blob_nm)
+    content = blob.download_as_bytes()
+    return content
 
 
 # convert the lines (string element) into json object
@@ -31,6 +37,7 @@ class ConvertToJson(beam.DoFn):
         out_value_list = element.split(',')
         out_dict = dict(out_list)
         yield out_dict
+
 
 # defining the custom options for runtime parameter
 class CustomOptions(PipelineOptions):
@@ -101,8 +108,10 @@ def run(argv=None):
 
     static_options, _ = parser.parse_known_args(argv)
     path = static_options.projectid + ":" + static_options.bq_dataset + "." + static_options.bq_table
-    
+    content = get_schema(static_options.gcs_input_file)
+    print("content:",content)
 
+    # PCollection and pipeline 
     lines = (
                 pipeline | 'Read File' >> beam.io.textio.ReadFromText(static_options.gcs_input_file)
                          | 'Call Pardo' >> beam.ParDo(ConvertToJson())

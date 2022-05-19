@@ -55,7 +55,9 @@
 
 ## How to create classic template for cloud dataflow?
 ### Ref:
-    1. 
+1. Google Doc: https://cloud.google.com/dataflow/docs/guides/templates/creating-templates
+
+### Steps:
 1. Run below template creation script by providing "template_location" param
     ```shell
     python ~/gcp_utility/gcp/dataflow/classic_template/gcs_to_bq_classic_beam.py \
