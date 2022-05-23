@@ -9,6 +9,7 @@ This repo is to learn GCP services easily
     1. Google doc for DAGs: https://cloud.google.com/composer/docs/how-to/using/writing-dags
     2. Aiflow GIT: https://github.com/apache/airflow/tree/main/airflow
     3. Airflow Official Doc: https://airflow.apache.org/docs/apache-airflow/2.2.3/dag-run.html
+4. Google Python API: https://cloud.google.com/python/docs/reference/storage/latest/google.cloud.storage.blob.Blob
 
 
 ### Pre-requisite:

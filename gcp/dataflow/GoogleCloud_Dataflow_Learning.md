@@ -53,6 +53,9 @@
     --temp_location gs://bucket_name/temp \
     ```
 
+2. Programatically specify Pipeline Options:
+    1. https://beam.apache.org/releases/pydoc/2.16.0/_modules/apache_beam/options/pipeline_options.html#GoogleCloudOptions
+
 ## How to create classic template for cloud dataflow?
 ### Ref:
 1. Google Doc: https://cloud.google.com/dataflow/docs/guides/templates/creating-templates

@@ -4,38 +4,54 @@ python ~/gcp_utility/gcp/dataflow/classic_template/gcs_to_bq_classic_beam.py \
     --bq_dataset test_dataset \
     --bq_table test_table \
     --projectid coherent-coder-346704 \
-    --project coherent-coder-346704 \
-    --runner DirectRunner \
+    --project coherent-coder-346704  \
+    --runner DataflowRunner  \
     --region us-central1 \
     --staging_location gs://coherent-coder-346704/staging/ \
     --temp_location gs://coherent-coder-346704/temp/ \
     --template_location gs://coherent-coder-346704/template/gcs_to_bq_classic_beam
+
+    --runner DataflowRunner \
 """
 
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions, SetupOptions
+from apache_beam.options.pipeline_options import StandardOptions
 from google.cloud import storage
 import argparse
 # import json
 import logging
 
 
-def get_schema(projectid: str, gcs_blob_path: str) -> str:
+def get_schema(projectid: str, gcs_blob_path: str, file_header: bool) -> str:
     bucket_nm = gcs_blob_path.split("/")[2]
     blob_nm = "/".join([str(item) for item in gcs_blob_path.split("/")[3:]])  # list comprehension
-    print(f"bucket name: {bucket_nm} and blob name: {blob_nm}")
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_nm)
-    blob = bucket.get_blob(blob_nm)
-    content = blob.download_as_bytes()
-    return content
+    #print(f"bucket name: {bucket_nm} and blob name: {blob_nm}")
+    storage_client = storage.Client(project=projectid)
+    bucket = storage_client.bucket(bucket_nm)
+    blob = bucket.blob(blob_nm)
+    content = blob.download_as_text().strip()
+    header = content.split("\r\n", 1)[0]
+    header_list = header.split(",")
+    #print("header:", header)
+    data_type = "string"
+    schema = ""
+    if not file_header:
+        for i in range(0, len(header_list), 1):
+            schema = schema + "cl_" + str(i) + f":{data_type},"
+    
+    schema = schema[:-1]
+    print("schema:", schema)
+    return schema
 
 
 # convert the lines (string element) into json object
 class ConvertToJson(beam.DoFn):
     def process(self, element):
+        #print(element)
         out_value_list = element.split(',')
-        out_dict = dict(out_list)
+        out_key_list = [ "cl_"+str(i) for i in range(0, len(out_value_list), 1)]
+        out_dict = dict(zip(out_key_list, out_value_list))
         yield out_dict
 
 
@@ -73,7 +89,11 @@ def run(argv=None):
     beam_options = PipelineOptions()
     pipeline = beam.Pipeline(options=beam_options)
     custom_options = beam_options.view_as(CustomOptions)
+    beam_options.view_as(StandardOptions).runner = "DataflowRunner"
+    beam_options.view_as(SetupOptions).setup_file = "./setup.py"
     beam_options.view_as(SetupOptions).save_main_session = True
+
+    print("custom_options:", custom_options)
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -106,23 +126,24 @@ def run(argv=None):
         default=str(custom_options.bq_table)     
     )
 
-    static_options, _ = parser.parse_known_args(argv)
+    static_options, beam_args = parser.parse_known_args(argv)
     path = static_options.projectid + ":" + static_options.bq_dataset + "." + static_options.bq_table
-    content = get_schema(static_options.gcs_input_file)
-    print("content:",content)
+    bq_schema = get_schema(static_options.projectid, static_options.gcs_input_file, False)
+    #print("content:",content)
+    print("beam_args:", beam_args)
 
     # PCollection and pipeline 
     lines = (
                 pipeline | 'Read File' >> beam.io.textio.ReadFromText(static_options.gcs_input_file)
                          | 'Call Pardo' >> beam.ParDo(ConvertToJson())
-                         | 'Print the lines' >> beam.Map(print)
+                         #| 'Print the lines' >> beam.Map(print)
     )
 
-    # lines | 'Write files' >> beam.io.gcp.bigquery.WriteToBigQuery(path,
-    #             # schema=Schema,
-    #             create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
-    #             write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
-    #         )
+    lines | 'Write files' >> beam.io.gcp.bigquery.WriteToBigQuery(path,
+                schema= bq_schema,
+                create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+                write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
+            )
 
     result = pipeline.run()
     result.wait_until_finish()
