@@ -44,4 +44,5 @@ This repo is to learn GCP services easily
     pip install google-cloud-storage
     pip install apache-beam[gcp]
     pip install google-auth
+    #python3 -m pip install -q --upgrade pip setuptools wheel
     ```

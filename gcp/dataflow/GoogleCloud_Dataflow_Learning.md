@@ -105,5 +105,56 @@
 
 ### Follow the below steps:
 1. Create Project, Enable Billing, Create service account and key (*Check GoogleCloud_API_IAM_Learning.md)
-1. Build a Docker container image.
-2. Create and run a Dataflow Flex Template.
+    ```shell
+    cd ~/gcp_utility/gcp/dataflow/flex_template/
+    export BASE_DIR=$(pwd)
+    export PROJECT_ID=coherent-coder-346704
+    ```
+2. Flex Template container image creation:
+    1. Execute below script to speed up the subsequent builds. Kaniko caches build containers.
+        ```shell
+        gcloud config set builds/use_kaniko True
+        ```
+    2. we will create our Dockerfile
+        1. **modify the line 6 and 7 in Dockerfile (copy and env variable) with our beam pipeline code.**
+    3. use Cloud Build to build the container image.
+        ```shell
+        export TEMPLATE_IMAGE="gcr.io/$PROJECT_ID/dataflow/gcs_to_bq_flex_beam:latest"
+        gcloud builds submit --tag $TEMPLATE_IMAGE .
+        ```
+        1. Images starting with gcr.io/PROJECT/ are saved into your project's Container Registry, where the image is accessible to other Google Cloud products. Although not shown in this tutorial, you can also store images in Artifact Registry.
+
+    4. Then build and stage the actual template
+        ```shell
+        export TEMPLATE_PATH="gs://${PROJECT_ID}/templates/gcs_to_bq_flex_beam.json"
+        # Will build and upload the template to GCS
+        # You may need to opt-in to beta gcloud features
+        gcloud beta dataflow flex-template build $TEMPLATE_PATH \
+        --image "$TEMPLATE_IMAGE" \
+        --sdk-language "PYTHON" \
+        --metadata-file "metadata.json"
+        ```
+    5. call the flex template from gcloud command:
+        ```shell
+        export PROJECT_ID=$(gcloud config get-value project)
+        export REGION='us-central1'
+        export JOB_NAME=mytemplate-$(date +%Y%m%H%M$S)
+        export TEMPLATE_LOC=gs://${PROJECT_ID}/templates/mytemplate.json
+        export INPUT_PATH=gs://${PROJECT_ID}/events.json
+        export OUTPUT_PATH=gs://${PROJECT_ID}-coldline/template_output/
+        export BQ_TABLE=${PROJECT_ID}:logs.logs_filtered
+        gcloud beta dataflow flex-template run ${JOB_NAME} \
+        --region=$REGION \
+        --template-file-gcs-location ${TEMPLATE_LOC} \
+        --parameters "inputPath=${INPUT_PATH},outputPath=${OUTPUT_PATH},tableName=${BQ_TABLE}"
+        ```
+    6. Cleaning up 
+        1. Stop the Dataflow pipeline
+        2. Delete the template spec file from Cloud Storage.
+            ```shell
+            gsutil rm $TEMPLATE_PATH
+            ```
+        3. Delete the Flex Template container image from Container Registry
+            ```shell
+            gcloud container images delete $TEMPLATE_IMAGE --force-delete-tags
+            ```

@@ -1,0 +1,29 @@
+{
+    "name": "gcs_to_bq_flex_beam",
+    "description": "Load csv data from gcs to bigquery",
+    "parameters": [
+        {
+            "name": "projectid",
+            "helpText": "Bigquery projectid",
+            "label": "projectid"
+        },
+        {   
+            "regexes": [
+                "^gs:\\/\\/[^\\n\\r]+$"
+            ],
+            "name": "gcs_input_file",
+            "helpText": "The gcs file path for the input csv to process. Example: 'gs://coherent-coder-346704/test1/yob1880.txt'",
+            "label": "Input Cloud Storage files"            
+        },
+        {
+            "name": "bq_dataset",
+            "helpText": "Bigquery dataset name",
+            "label": "Bigquery dataset name"
+        },
+        {
+            "name": "bq_table",
+            "helpText": "Bigquery table name",
+            "label": "Bigquery table name"
+        }
+    ]
+}

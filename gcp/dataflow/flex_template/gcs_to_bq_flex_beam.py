@@ -133,7 +133,7 @@ def run(argv=None):
     #google_cloud_options.staging_location = 'gs://coherent-coder-346704/staging/'
     #google_cloud_options.temp_location = 'gs://coherent-coder-346704/temp/'
     #google_cloud_options.template_location = 'gs://coherent-coder-346704/templates/gcs_to_bq_classic_beam'
-    beam_options.view_as(SetupOptions).setup_file = "./setup.py"
+    #beam_options.view_as(SetupOptions).setup_file = "./setup.py"
     beam_options.view_as(SetupOptions).save_main_session = True
 
     # generate the bigquery table
