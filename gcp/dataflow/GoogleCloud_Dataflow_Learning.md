@@ -66,17 +66,17 @@
 ### Steps:
 1. Run below template creation script by providing "template_location" param
     ```shell
-    python ~/gcp_utility/gcp/dataflow/classic_template/gcs_to_bq_classic_beam.py \
-    --gcs_input_file gs://coherent-coder-346704/test1/yob1880.txt \
-    --bq_dataset test_dataset \
-    --bq_table test_table \
-    --projectid coherent-coder-346704 \
-    --project coherent-coder-346704 \
-    --runner DataFlowRunner \
-    --region us-central1 \
-    --staging_location gs://coherent-coder-346704/staging/ \
-    --temp_location gs://coherent-coder-346704/temp/ \
-    --template_location gs://coherent-coder-346704/template/gcs_to_bq_classic_beam
+    python gcs_to_bq_classic_beam.py \
+        --gcs_input_file gs://coherent-coder-346704/test1/yob1880.txt \
+        --bq_dataset test_dataset \
+        --bq_table test_table \
+        --projectid coherent-coder-346704 \
+        --runner DataflowRunner \
+        --project coherent-coder-346704 \
+        --staging_location gs://coherent-coder-346704/staging \
+        --temp_location gs://coherent-coder-346704/temp \
+        --template_location gs://coherent-coder-346704/templates/gcs_to_bq_classic_beam \
+        --region us-central1
     ```
 2. create *\<template_name\>_metadata* file and keep the file in same gcs location with the template_location
     ```shell
@@ -87,6 +87,11 @@
     gcloud dataflow jobs run [JOB_NAME] \
     --gcs-location gs://<template_location>
     ```
+
+## Classic template vs Flex Template
+1. The Dataflow runner does not support ValueProvider options for Pub/Sub topics and subscription parameters. If you require Pub/Sub options in your runtime parameters, switch to using Flex Templates.
+2. Flex Template requires Docker files where you install all dependencies.
+3. Flex is latest and supports both batch and stream.
 
 
 ## How to create Flex Template for cloud Dataflow?
