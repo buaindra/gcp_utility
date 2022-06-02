@@ -1,4 +1,7 @@
 # Google Cloud APIs and IAM
+### Ref: 
+1. Google Python API: https://cloud.google.com/python/docs/reference
+2. 
 
 ## Cloud APIs:
 ### How to List all APIs (*Gcloud Command):
