@@ -50,7 +50,7 @@ default_args = {
 
 def read_config_db(**kwargs):
     #SRC_TBL_NM = kwargs.get("SRC_TBL_NM", [])
-    SRC_TBL_NM = kwargs["dag_run"].conf.get("SRC_TBL_NM", [])
+    SRC_TBL_NM = kwargs["dag_run"].conf.get("SRC_TBL_NM", "ALL")
     logging.info("Current SRC TBL NM value is " + str(SRC_TBL_NM))
 
     where additional = ""
@@ -98,7 +98,7 @@ def return_config():
 
 
 with DAG(
-    dag_id="TEST_PL_Indra", 
+    dag_id="dag_dynamic_task", 
     schedule interval=None,
     tags=['ingestion'],
     default_args=default_args, 
@@ -110,7 +110,7 @@ with DAG(
 
     #Dummy DAGS
     start=DummyOperator(task_id="start", dag=dag) 
-    end=DummyOperator(task_id="end", dag-dag, trigger_rule="none_failed_or_ski
+    end=DummyOperator(task_id="end", dag=dag, trigger_rule="none_failed_or_skipped")
 
     read_config_db = PythonOperator(
         task_id='read_config_db,
