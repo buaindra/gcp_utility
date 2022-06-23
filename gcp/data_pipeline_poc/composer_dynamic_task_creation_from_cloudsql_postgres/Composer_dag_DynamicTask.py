@@ -243,7 +243,10 @@ with DAG(
                     "placement": {"cluster_name": CLUSTER_NAME},
                     "pyspark_job": {
                         "main python_file_uri": "gs://<bucket>/notebooks/jupyter/pyjob.py", 
-                        "args": [Variable.get("batch_id"), logger_name, table]
+                        "args": [Variable.get("batch_id"), logger_name, table]  
+                        # in dataproc file
+                        # import sys
+                        # param1 = sys.argv[1] # [0] is by default file name
                     },
                 }
                 pyspark_task= DataprocSubmitJobOperator(
