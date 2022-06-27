@@ -15,7 +15,11 @@ from airflow.contrib.operators.bigquery_check_operator import BigQueryCheckOpera
 from airflow.providers.google.cloud.operators.dataproc import (
     DataprocSubmitJobOperator,
 )
-from airflow.contrib.operators.dataproc_operator import DataprocclusterCreateOperator, DataProcPySparkOperator, DataprocClusterDeleteOperator
+from airflow.contrib.operators.dataproc_operator import (
+    DataprocClusterCreateOperator,
+    DataProcPySparkOperator,
+    DataprocClusterDeleteOperator
+)
 from airflow.utils.task_group import TaskGroup
 from airflow import models
 from datetime import datetime, timedelta
@@ -25,6 +29,7 @@ import logging  #added this to use Logging INFO
 import configparser
 import logging
 import google.cloud.logging
+from google.cloud.logging_v2.resource import Resource
 from google.cloud.logging.handlers import CloudLoggingHandler
 from google.cloud import bigquery  # needs to install pypi
 import uuid
@@ -37,10 +42,12 @@ region=models.Variable.get("region")
 env "DEV
 config=confignarser.ConfigParser()
 config.read(/home/airflow/ges/data/ConfigFile.properties")
-default_tables=config.get(env, "tables_name").split(", ")[:1]
-Logging.info(f"{default_tables}")
+default_tables=config.get(env, "tables_name").split(", ")[:]
+logging.info(f"{default_tables}")
 batch_id = str(uuid.uuid4())
-
+PROJECT_ID = ""
+REGION = ""
+CLUSTER_NAME = ""
 
 # hard coded table
 
@@ -49,6 +56,9 @@ batch_id = str(uuid.uuid4())
 #     table_name = "table_" + str(i) 
 #     default_tables.append(table_name)
 
+logger_name = "test_log"
+log_resource = Resource(type='global',
+                        labels={"dag_id": "test_pipeline"})
 def _custom_log(logger_name):
     gcloud_logging_client = google.cloud.logging.Client()
 
@@ -66,7 +76,7 @@ logger = _custom_log (logger_name)
 logger.log_text("sample_logging_test_dag_logging_test", severity="INFO") 
 logger.log_struct({
     "name": "King Arthur",
-})
+}, severity="WARNING", resource=log_resource)
 
 default_args = {
     "start_date': datetime (2022, 3, 1), #example date
@@ -113,7 +123,7 @@ def read_config_db(**kwargs):
     ti.xcom_push(key='FINAL_SRC_TBL_NM', value-table_names)
 
 
-def branching_func(**kwargs):
+def _branching_func(**kwargs):
     ti = kwargs['ti']
     executable_tasks=ti.xcom_pull(key="FINAL_SRC_TBL_NM", task_ids="read_con 
     #new_List = ["tkl "+str(table) for table in executable tasks] 
@@ -159,6 +169,38 @@ with DAG(
         do_xcom_push-False,
         dag=dag
     )
+
+    create_dataproc_cluster = DataprocClusterCreateOperator(
+        task_id="create_dataproc_cluster",
+        project_id=PROJECT_ID,
+        cluster_name="pyspark-cluster-{{ ds_nodash }}"
+        region=REGION,
+        zone="us-central1-a",
+        master_machine_type="n1-standard-4",
+        master_disk_size=100,
+        num_workers=2,
+        worker_machine_type="n1-standard-4",
+        worker_disk_size=100,
+        image_version = "2.0-debian10",
+        #service_account=
+        #storage_bucket=
+        properties={
+            "dataproc:dataproc.logging.stackdriver.job.driver.enable": "true",
+            "dataproc:dataproc.logging.stackdriver.enable": "true",
+            "dataproc:jobs.file-backed-output.enable": "true",
+            "dataproc:dataproc.logging.stackdriver.job.yarn.container.enable": "true"
+        },
+    )
+
+    delete_dataproc_cluster = DataprocClusterDeleteOperator(
+        task_id="delete_dataproc_cluster",
+        project_id=PROJECT_ID,
+        cluster_name="pyspark-cluster-{{ ds_nodash }}"
+        region=REGION,
+        trigger_rule="all_done",
+    )
+
+    
     
     # requiered parameter missing error occured
     # merge_query_job = BigQueryInsertJobOperator(
@@ -199,7 +241,7 @@ with DAG(
     start_merge_query_time = PythonOperator (
         task id='start_merge_query_time',
         provide context=True,
-        python_callable=_start_merge_query_time,
+        python_callable=_start_merge_query_time,     
     )
 
     merge_query job = BigQueryOperator (
@@ -212,20 +254,41 @@ with DAG(
         delete from `gls-customer-poc.ds2.source` staging where 1=1;
         insert into `gls-customer-poc.ds2.source_staging` select * from `gls-customer-poc.ds2.source`;
         ''',
-        dag-dag
+        dag=dag
+    )
 
-    def _end_merge_query_time (ti):
+    def _end_merge_query_time_success(**kwargs):
         end tm = datetime.now().strftime('%Y-%m-%d %H-SM-S-SE')
-        start_tm = ti.xcom pull (key='start_tm', task_ids="start_merge_query_time")
-        logger.log struct({
-            "batch id": Variable.get("batch id"),
-        }, severity="WARNING")
+        table = str(kwargs.get("table_name", "No table name"))
+        print(table)
+        table_name = table.split("_")[:-2][-2] + "_table"
+        start_tm = ti.xcom pull(key='start_tm', task_ids=f"{table_name}_TaskGrp.start_merge_query_time_{table_name}")
+        logger.log_struct({
+            "batch id": Variable.get("batch_id"),
+            "table_name": table_name,
+        }, severity="WARNING", resource=log_resource)
         
-    end_merge_query_time = PythonOperator (
-        task id='end_merge_query_time',
-        provide context=True,
-        python_callable=_end_merge_query_time,
-    )  
+    def _end_merge_query_time_failed(ti):
+        logger.log_struct({
+            "batch id": Variable.get("batch id"),
+        }, severity="ERROR", resource=log_resource)
+
+    def _check_end_row_count(**kwargs):
+        bq_client = bigquery.Client()
+        query = ("select count(1) as count_row from `project.dataset.table`")
+        query_job = bq_client.query(query)
+        rows = query_job.result()
+        output=0
+        for row in rows:
+            output = output + int(row.count_row)
+            
+        table = str(kwargs.get("table_name", "No table name"))
+        table_name = table.split("_")[:-2][-2] + "_table"
+        logger.log_struct({
+            "batch id": Variable.get("batch_id"),
+            "table_name": table_name,
+        }, severity="WARNING", resource=log_resource)
+        
 
     # start >> read_config_db >> branch_task  \
     # >> [DummyOperator(task_id=f"tk1_(table)", dag=dag) for table in return_config()]  \
@@ -251,6 +314,38 @@ with DAG(
                 }
                 pyspark_task= DataprocSubmitJobOperator(
                     task_id=f"pyspark_task_{table}", job=PYSPARK_JOB, region=REGION, project_id=PROJECT_ID
+                )
+
+                end_merge_query_time_success = PythonOperator (
+                    task id='end_merge_query_time_success_{table}',
+                    provide context=True,
+                    python_callable=_end_merge_query_time,
+                    op_kwargs={"table_name": "{{ task_instance_key_str }}"},
+                    trigger_rule="none_failed_or_skipped"
+                )
+
+                end_merge_query_time_failed = PythonOperator (
+                    task id='end_merge_query_time_failed_{table}',
+                    provide context=True,
+                    python_callable=_end_merge_query_time_success,
+                    op_kwargs={"table_name": "{{ task_instance_key_str }}"},
+                    trigger_rule="one_failed"
+                )
+
+                end_merge_query_time_failed = PythonOperator (
+                    task id='end_merge_query_time_failed_{table}',
+                    provide context=True,
+                    python_callable=_end_merge_query_time_failed,
+                    op_kwargs={"table_name": "{{ task_instance_key_str }}"},
+                    trigger_rule="one_failed"
+                )
+
+                check_end_row_count = PythonOperator (
+                    task id='check_end_row_count_{table}',
+                    provide context=True,
+                    python_callable=_check_end_row_count,
+                    op_kwargs={"table_name": "{{ task_instance_key_str }}"},
+                    trigger_rule="one_failed"
                 )
 
                 branch_task >> tk1 >> tk2 >> end

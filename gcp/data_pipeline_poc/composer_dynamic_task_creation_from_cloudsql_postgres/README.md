@@ -35,3 +35,11 @@ curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//'
 	3. composer.googleapis.com
 	4. create new service account, add editor, composer.worker role. and provide yourself service.admin and service.user role.
 	5. sudo apt install postgresql-client-common postgresql-client
+
+3. install below packages in composer env
+        1. cloud-sql-python-connector [pg8000]
+        2. SQLAlchemy
+        3. google-cloud-storage
+        4. google-cloud-bigquery
+
+4. provide gcs storage admin role to dataproc sa (google managed sa for dataproc service agent)
