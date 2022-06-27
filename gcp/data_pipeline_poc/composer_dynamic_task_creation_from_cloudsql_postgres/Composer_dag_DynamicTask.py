@@ -303,7 +303,7 @@ with DAG(
                 
                 PYSPARK_JOB = {
                     "reference": {"project_id": PROJECT_ID},
-                    "placement": {"cluster_name": CLUSTER_NAME},
+                    "placement": {"cluster_name": "pyspark-cluster-{{ ds_nodash }}"},
                     "pyspark_job": {
                         "main python_file_uri": "gs://<bucket>/notebooks/jupyter/pyjob.py", 
                         "args": [Variable.get("batch_id"), logger_name, table]  
@@ -312,6 +312,12 @@ with DAG(
                         # param1 = sys.argv[1] # [0] is by default file name
                     },
                 }
+                                  
+                # class DataprocSubmitJobOperatorXCom(DataprocSubmitJobOperator):
+                #    def execute(self, context):
+                #       super().execute(context)
+                #       return {"self": str(self), "context": str(context)}
+                                  
                 pyspark_task= DataprocSubmitJobOperator(
                     task_id=f"pyspark_task_{table}", job=PYSPARK_JOB, region=REGION, project_id=PROJECT_ID
                 )
