@@ -1,0 +1,22 @@
+twitter: @ruchiji
+
+--==========================
+1. live event link: https://cloudonair.withgoogle.com/events/data-engineer-spotlight
+2. youtube link: https://www.youtube.com/watch?v=ipibg-53Y1M
+--==========================
+Keywords
+--==========================
+1. dataform (bigquery) -> gcloud builds submit
+2. dataflow go, ml, prime
+3. BQMS: 
+	--Migration Services 
+		--Planning, 
+		--Assessment(Teradata), 
+		--Automated SQL Translation(Batch/Interactive(understand/debugging)), 
+		--Data Transfer, 
+		--Validation, 
+	-- feature: no cost, trusted service
+4. dataplex + data catalog: 
+	--unify metadata across distributed data
+	--metadata governence at single place
+--===========================
