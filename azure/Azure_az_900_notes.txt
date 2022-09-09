@@ -1,0 +1,107 @@
+www.microsoft.com/certification
+www.aka.ms.MOC
+www.Microsoft.com/Learn
+www.aka.ms/architecture
+www.aka.ms/TrainCertPoster
+www.aka.ms/Docs
+
+--=================================
+## Module 1 (Cloud Computing):
+1. compute, network, storage
+1. cloud model: public vs private vs hybrid cloud
+2. cap-ex and op-ex (consumption based expenditure, no upfront cost)
+3. Cloud Benefits:
+	1. High Availability: ensure maximum gurranty for availability, part of SLA
+	2. Scalability: ability to adjust our resource demand, to add more resource when required, and only pay for that, then reduce as well. 
+	(Vertical (More CPU and RAM in same machine)and Horizontal (add another machine))
+	3. Reliability: ensure fault tolerance, if any regin got hampered then other region will have the backup. 
+	4. Predictability: predict the resource depends on the workload and it can auto-scale based on demand. and Load-balancing
+	5. Security: Iaas -> Paas -> Saas
+	6. Governance:
+	7. Managebility:
+	
+4. Cloud Service Types:
+	1. Iaas: Infrastructure as a service (Only provide Infra) (example: VM Machine)
+	2. Paas: Iaas + OS + Licensing + Patchhing (example: SQL DB)
+	3. Saas: Paas + Hosted Application/Apps (Teams, Office 365, onedrive)
+	
+## Module 2 (Azure Architechture and Services):
+1. Azure Sandbox: https://docs.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/4-exercise-explore-learn-sandbox
+2. https://infrastructuremap.microsoft.com/
+
+1. Region
+	1. Availability Zone: 
+		1. Physically separated 1 to many zones in a same region 
+		2. They are connected through private network
+	2. Region Pairs:
+		1. At least 300 miles distance
+		2. there is no charge 
+		3. High Availability, no extra cost, data will be replicated
+	3. Azure Sovereign region:
+		1. its only for US Goverment Services.
+		2. isolated instance with additional compliance.
+		3. Azure China same.
+		
+2. Azure Resources:
+are components are available to build cloud solution.
+	1. Virtual Machine
+	2. Storage Account
+	3. Virtual Networks
+	4. App Services
+	5. SQL Databases
+	6. Functions
+	
+3. Resource Groups: 
+	1. is a container to manage and aggregate resources in a single unit.
+	2. resources can be in diff regions
+4. Azure Subscription:
+5. Manager Group:
+
+
+6. Compute and Networking:
+
+	1. VM Availibility Sets: Update Domain and Fault Domain
+	2. https://docs.microsoft.com/en-us/azure/virtual-machines/availability-set-overview
+
+https://teams.microsoft.com/_#/pre-join-calling/19:meeting_MDk0OTZkOWUtZDFlOC00YmMxLWIyMjUtZDI3NjBlOTZjMTY2@thread.v2:~:text=Exercise%20%2D%20Create%20an%20Azure%20Virtual%20Machine
+
+1 account can create multiple subscription, 
+and 1 subscription can be managed by multiple users. 
+Subscription is the container of RG, RG is the container of Resources
+
+MG -> subscription -> RG -> 
+
+aka.ms/azfunpath
+
+availability zone vs availability set
+Availability sets are a way for you to ensure your application remains online if a high-impact maintenance event is required, or a hardware a failure occurs, in the same datacentre(remember within 1 datacentre). Availability sets are made up of Update domains and Fault domains (used for Fault tolerance or downtime). These are separate physical devices in the same datacentre. Availability Zone, on the other hand, is an isolation boundary containing one or more datacentres equipped with independent power, cooling, and networking.
+vnet,DNS,express route, VPN
+
+Event-driven scaling in Azure Functions In the Consumption and Premium plans, Azure Functions scales CPU and memory resources by adding additional instances of the Functions host.
+
+https://docs.microsoft.com/en-us/training/modules/intro-to-azure-bastion/
+WVD brings the best profile management solution in a virtual environment with virtualized GPU (vGPU) to run high-end graphics, complex and demanding design applications all coming with tight multi-layered security system.
+
+
+To sum up, WVD is a combination of all the different Azure virtual machines and goes even beyond bringing some unique features for the first time in the journey of virtualization. The kind of VM a business needs will depend on its specific requirement and available budget. A good virtual desktop infrastructure provider or a Desktop-as-a-service (DaaS) vendor should bring the tailor-made solution after understanding a company’s goal and business requirements with an easy step-up/down or pay-as-you-use offer.
+
+storage account
+container, to store blobs
+
+Learn Path and Exams:
+AZ-900 Learning Path: https://aka.ms/AZFunPath
+AZ-900 Exam Page:  https://aka.ms/AZfunExam
+Setup guide:  https://aka.ms/AZ900/Setup
+Training Journey:  https://aka.ms/esiAzureTrainingJourney
+Hands-on Practice:
+AZ-900 Sandbox:  https://aka.ms/az900/sandbox
+ESI Support: http://esisupport.microsoft.com
+Further Learning:
+Poster: www.aka.ms/TrainCertPoster
+Learner Experience Portal: http://esi.microsoft.com
+ESI Study Guides:  https://aka.ms/ESIStudyGuides
+ 
+Survey: Survey URL
+
+https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/organize-subscriptions
+
