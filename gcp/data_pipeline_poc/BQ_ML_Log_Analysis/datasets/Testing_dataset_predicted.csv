@@ -1,0 +1,529 @@
+predicted_label,predicted_label_probs,anomalyID,srcIP,srcPort,dstIP,dstPort,taxonomy,heuristic,distance,nbDetectors
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99998803875250919""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""6.4826493586158938e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""5.4785981322445612e-06""
+  }]
+}",137,0,0,52.137.151.247,0,alphfl,504,-0.495735,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999988197166456""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""7.2926812164105257e-08""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""4.510152343211759e-08""
+  }]
+}",38,36.228.107.231,0,0,1433,ntscSYN139445,,-0.162286,3
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999962224246208""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""2.5308722280150988e-07""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.2467031518889972e-07""
+  }]
+}",130,163.194.71.144,0,198.4.40.219,0,mptpla,,-0.229724,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.9999998913226773""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""6.355954313064585e-08""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""4.5117779655920933e-08""
+  }]
+}",25,171.26.111.175,0,0,1433,ntscSYN139445,,-0.162286,3
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99998509019548265""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""9.73566956942863e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""5.1741349480168681e-06""
+  }]
+}",161,0,0,216.194.184.148,0,mptpla,504,-0.495735,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999910385389823""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""5.0526082109733131e-07""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""3.9088528081739707e-07""
+  }]
+}",60,71.54.246.228,1443,203.76.116.225,1443,sptpDoSSYN,,-0.341792,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99826068835035608""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00097045244861634818""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.00076885920102764125""
+  }]
+}",68,133.229.53.2,0,49.184.157.35,80,point_to_point,,-0.09333,2
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99998331627586412""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""1.4698953605894432e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.9847705300436354e-06""
+  }]
+}",62,0,0,69.88.97.95,0,mptpla,999,-0.495735,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99842392428038451""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.0015200232045714118""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""5.6052515044164515e-05""
+  }]
+}",88,38.196.26.2,53,0,0,mptmp,,-0.312698,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99996900635466957""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""2.9138064667964829e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.8555806625467303e-06""
+  }]
+}",36,118.225.175.15,0,0,6379,sntscSYN,,-0.341792,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99997158893168259""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""2.5008588032917015e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""3.4024802846433873e-06""
+  }]
+}",94,0,0,203.76.72.201,53,ntscUDPUDPrp,,-0.379151,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99853145872634752""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.0012839198678437085""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00018462140580876495""
+  }]
+}",128,133.251.140.36,0,165.23.158.149,0,heavy_hitter,,-0.229724,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99961282204737945""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00037095212943773573""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.6225823182921287e-05""
+  }]
+}",95,0,0,44.230.236.128,53,mptpla,,-0.379151,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999401768951734""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""3.6046229046824585e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""2.377687578139908e-06""
+  }]
+}",33,203.229.7.252,0,0,1433,ntscSYN,,-0.162286,3
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99773164889193966""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.002075662734341518""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.00019268837371903073""
+  }]
+}",83,0,0,133.251.142.53,0,mptp,,-0.379151,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999816301332467""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.1179816143481798e-06""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""7.1900506103246e-07""
+  }]
+}",116,119.231.110.29,0,203.76.77.50,53,alphfl,,-0.08844,3
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99961608481971642""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00027150579094908846""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.00011240938933451424""
+  }]
+}",56,0,5900,14.9.205.219,0,mptp,,-0.341792,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999717550448541""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""1.5774492641531375e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.2470462505439531e-06""
+  }]
+}",6,203.76.73.8,0,50.3.125.177,0,ipv4gretun,,-0.225399,3
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99991351055518729""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""4.53262628012136e-05""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""4.1163182011646286e-05""
+  }]
+}",111,0,80,163.194.144.136,0,mptp,504,-0.481969,1
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.9998425128902988""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.00013926020245019348""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""1.8226907251061737e-05""
+  }]
+}",183,17.113.181.33,443,163.194.158.4,63734,salphfl,504,-0.549656,1
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99864823934436442""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""0.001311258899267892""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""4.0501756367905825e-05""
+  }]
+}",10,159.206.81.74,58547,0,26044,ntscSYN,10,-0.549656,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.97486170111461423""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.020388819574244439""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.0047494793111414078""
+  }]
+}",66,133.251.68.81,22,209.157.49.5,0,salphfl,,-0.09333,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.92967023816922745""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.069597440880886444""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00073232094988622009""
+  }]
+}",143,39.30.8.108,0,0,6379,ntscSYN,,0.26343,6
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99998347142554023""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""1.4481139210221676e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""2.0474352495199829e-06""
+  }]
+}",64,0,0,69.250.162.238,0,mptpla,999,-0.495735,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999361985657276""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""4.27168758164489e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""2.1084558457616131e-06""
+  }]
+}",12,58.47.12.2,0,0,445,ntscSYN139445,,-0.162286,3
+anomalous,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""anomalous"",
+    ""prob"": ""0.99853557252623171""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""0.0011664803695442536""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00029794710422419239""
+  }]
+}",171,203.76.70.133,0,5.173.104.48,58360,heavy_hitter,,0.21901,7
+anomalous,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""anomalous"",
+    ""prob"": ""0.99999521496118915""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""2.9005693956399015e-06""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""1.8844694152785142e-06""
+  }]
+}",162,0,443,163.194.227.6,0,mptmp,,0.46928,7
+anomalous,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""anomalous"",
+    ""prob"": ""0.99986909733170071""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""0.00010796568938745535""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""2.2936978911934266e-05""
+  }]
+}",149,45.109.164.68,8080,0,0,mptmp,,0.50533,9
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.999959609135163""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""3.9699825855577738e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""6.9103898154664286e-07""
+  }]
+}",88,38.196.26.2,0,17.2.202.12,0,mptmp,,-0.312698,2
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99999121963486493""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""5.6216164980125361e-06""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""3.1587486370771826e-06""
+  }]
+}",198,0,0,159.217.128.47,0,salphfl,504,-0.495735,1
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99998504465840876""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""1.0727789239586599e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""4.2275523517248692e-06""
+  }]
+}",148,0,0,52.156.100.220,0,mptpla,504,-0.495735,1
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99998510542882646""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""9.9561508702134586e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""4.93842030336721e-06""
+  }]
+}",158,0,0,67.43.15.233,0,mptpla,504,-0.495735,1
+anomalous,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""anomalous"",
+    ""prob"": ""0.99853557252623171""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""0.0011664803695442536""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00029794710422419239""
+  }]
+}",171,203.76.70.133,0,5.173.104.48,58144,heavy_hitter,,0.21901,7
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999561776924861""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""3.0133906530666942e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.3688400983969754e-06""
+  }]
+}",9,61.157.143.192,0,0,1433,ntscSYN,,-0.162286,3
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.95411271843670264""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""0.04518450156627913""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.00070277999701833925""
+  }]
+}",181,99.180.77.4,443,163.194.161.26,54570,salphfl,504,-0.549656,1
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99996900764181884""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""2.9677579663371831e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.3147785177989236e-06""
+  }]
+}",123,133.229.187.87,0,0,443,ptmp,504,-0.360208,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999975384424133""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""1.7062063142869864e-07""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""7.5535127374059562e-08""
+  }]
+}",13,42.30.22.254,0,0,8728,ntscSYN,,-0.245747,3
+notice,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""notice"",
+    ""prob"": ""0.99998897879363824""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""9.1965212547687775e-06""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""1.8246851070570544e-06""
+  }]
+}",6,0,32263,165.28.199.175,58810,mptp,10,-0.481969,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999489122648122""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""3.5986720826880424e-06""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""1.5101014361535959e-06""
+  }]
+}",118,23.211.189.69,80,163.194.159.58,0,ptmplaHTTP,,-0.229724,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99998222472667853""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""1.5461219274663625e-05""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""2.3140540469070105e-06""
+  }]
+}",130,0,0,198.4.40.219,443,mptpla,,-0.229724,2
+anomalous,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""anomalous"",
+    ""prob"": ""0.99999701305821675""
+  }, {
+    ""label"": ""suspicious"",
+    ""prob"": ""1.9167098258861415e-06""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""1.0702319574257975e-06""
+  }]
+}",138,5.173.104.48,58144,203.76.70.133,0,heavy_hitter,,0.44935,8
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99934410088221648""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.00062690798144765015""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""2.8991136335872907e-05""
+  }]
+}",97,133.223.4.29,0,13.98.51.192,53,salphfl,,-0.379151,1
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.99999910385389823""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""5.0526082109733131e-07""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""3.9088528081739707e-07""
+  }]
+}",60,71.54.246.228,1443,133.251.128.2,1443,sptpDoSSYN,,-0.341792,2
+suspicious,"{
+  ""predicted_label_probs"": [{
+    ""label"": ""suspicious"",
+    ""prob"": ""0.50475921116127731""
+  }, {
+    ""label"": ""anomalous"",
+    ""prob"": ""0.49415642735345422""
+  }, {
+    ""label"": ""notice"",
+    ""prob"": ""0.001084361485268514""
+  }]
+}",167,222.184.8.242,9090,0,22,ntscSYN,,0.32702,7
