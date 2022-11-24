@@ -1,0 +1,21 @@
+{
+	"name": "api_to_bigquery_json_flex",
+	"description": "Templated pipeline to read json output as response from rest api, apply a python UDP to it, and write it to Bigquery.",
+	"parameters": [
+		{
+			"name": "input_api_endpoint",
+			"helpText": "Provide api endpoint base url: https://cat-fact.herokuapp.com/facts", 
+			"label": "Provide api endpoint base url (**Required**)"
+		},
+		{
+			"name": "output_bq_table",
+			"helpText": "Bigquery Table for storing output results as: PROJECT:DATASET. TABLE or DATASET TABLE", 
+			"label": "PROJECT: DATASET. TABLE OF DATASET. TABLE (**Required**)"
+		},
+		{
+			"name": "secret_id_api_key",
+			"helpText": "Provide Secret ID, stored api key for authentication, project id:secret_name:secrect_id", 
+			"label": "project_id:secret_name: secrect id or None"
+		}
+	]
+}
