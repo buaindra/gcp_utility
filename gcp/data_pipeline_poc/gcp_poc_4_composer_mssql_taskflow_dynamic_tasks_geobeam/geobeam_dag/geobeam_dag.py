@@ -43,203 +43,87 @@ docker push gcr.io/<project_id>/geobeam
 6. execute the dataflow job
 
 ** locally tested **
-python3-rametrics/dags/sample geobeam.pyx
---runner-PortableRunner A
---job_endpoint=embed\ 47 --environment type "DOCKER"
-
-45 -environment config-"S(IMAGE_URI"
-
-49 --temp location qs://tmp_geobean_bucket_1/
-
-50 --service account email ee-geobeam-higquery@rametric-sbx-toc. Lam.gserviceaccount.com
-
-51 -gas url gs://geobeam/examples/510104_20170217.zip \ 52 -layer name S FLD HAZ AR
-
-53
-
-dataset examples
-
-54
-
-tahle FLD HAS AR
-
-55
-
-56 python3/rametrics/dags/sample geobeam.py\
-
-cunner DataflowRunner
-
---project rsmetric-sbx-toe A
-
-59 --region us-centrall --temp-location gs://tmp_geobeam Bucket 1/
-
-60
-
-61 -sdk container image ger,lo/rametrio-abx-toc/geobeam V
-
-62 --experiment use runner v2
-
-63
-
-service account email en-geobeam-bigquery@rametric-sbx-toclam.gserviceaccount.
-
-A
-
-64 --des prl gs://geobeam/examples/510104 26170217.zip
-
-65 layer name S FLD HAZ AR
-
-66 dataset examples \ table FLD HAZ AR V
-
-machine type c2-standard-30)
-
-length:
-clean up ** gelaud container Amager delete gor.fo/cameraceabx-toc/quobeall --torce-delete-tagN
-
-71 72
-
-74
-
-75 76
-
-def
-
-run (pipeline_args, known_args):
-
-Invoked by the Beam runner
-
-78
-
-79
-
-80 81
-
-82 83
-
-import apache beam as beam
-
-from apache beam. io.gep.internal.clients import bigquery as beam bigquery
-
-from apache beam.options.pipeline options import PipelineOptions, SetupOptions from apache beam.options.pipeline options import GooglecloudOptions
-
-from geobeam. Lo import ShapefileSource from geobeam. fn import format record, make valid, filter invalid
-
-from datetime import datetime
-
-Ι
-
-84
-
-85
-
-197
-
-89 90
-
-pipeline options = PipelineOptions([
-
---experiments, use beam bq sink,
-
-1 + pipeline args)
-
-03 91
-
-pipeline options, view as (GooglecloudOptions), job_name "ged-beam-ipal-" V
-
-+datetime.now().strftime("Y-1m-\d+3H-1M-13") pipeline options.view as (SetupOptions).save_main_session = True
-
-95
-
-917
-
-with beam.Pipeline (options-pipeline options) as p:
-
-98
-
-99
-
-400
-
-101
-
-102
-
-"Read Shape file">> beam. 1o. Read (ShapefileSource (known_args.gus_url,
-
-layer_name=known_args. layer name)) 'MakeValid >> beam. Map (make_valid)
-
-FilterInvalid>> beam. Filter(filter invalid)
-
-'FilterInvalid' >> beam. Filter (filter invalid)
-
-I 'Format Records' >> beam.Map (format_record) I 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
-
-beam bigquery.TableReference (
-
-datasetId=known_args.dataset, tableld-known_args.table),
-
-method-beam. 1o. WriteToBigQuery.Method.FILE_LOADS,
-
-schema "SCHEMA AUTODETECT",
-
-write disposition-beam.io.BigQueryDisposition.WRITE TRUNCATE, create disposition-beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
-
-112
-
-113
-
-114
-
-115
-
-if name
-
-116
-
-import logging
-
-import argparse
-
-logging.getLogger().setLevel (logging. INFO)
-
-I
-
-122
-
-123
-
-124
-
-125
-
-parser = argparse. Argument Parser()
-
-parser.add_argument (--gcs_url')
-
-parser.add_argument ('--dataset')
-
-parser.add argument (--table')
-
-parser.add_argument ('--layer name") parser.add argument('--in_epsg', type-int, default=None)
-
-known_args, pipeline args = parser.parse_known_args()
-
-126
-
-127
-
-128
-
-129
-
-run (pipeline args, known_args)
-
-Ln: 52 Col 28 Pos: 1884
-
-UTF-8
-
-Unix (LF)
-
-INS
-
-length:
+python3 ~/dags/geobeam_dag.py \
+--runner=PortableRunner \
+--job_endpoint=embed \
+--environment_type="DOCKER" \
+--environment_config="${IMAGE_URI}" \
+--temp_location qs://tmp_geobean_bucket_1/ \
+--service_account_email geobeam-bigquery@project_id.iam.gserviceaccount.com \
+--gcs_url gs://geobeam/examples/510104_20170217.zip \
+--layer_name S_FLD_HAZ_AR \
+--dataset examples \
+--table FLD_HAS_AR
+
+
+python3 ~/dags/geobeam_dag.py \
+--runner=DataflowRunner \
+--project <project_id> \
+--region us-centrall \
+--temp_location qs://tmp_geobean_bucket_1/ \
+--sdk container image ger,lo/rametrio-abx-toc/geobeam V
+--experiment use_runner_v2
+--service_account_email geobeam-bigquery@project_id.iam.gserviceaccount.com \
+--gcs_url gs://geobeam/examples/510104_20170217.zip \
+--layer_name S_FLD_HAZ_AR \
+--dataset examples \
+--table FLD_HAS_AR \
+--machine_type c2-standard-30
+
+
+** clean up ** 
+    >> gcloud container images delete gcr.io/<project_id>/geobeam --force-delete-tags
+"""
+
+def run (pipeline_args, known_args):
+    """
+    Invoked by the Beam runner
+    """
+    
+    import apache_beam as beam
+    from apache_beam.io.gcp.internal.clients import bigquery as beam_bigquery
+    from apache_beam.options.pipeline_options import PipelineOptions, SetupOptions 
+    from apache_beam.options.pipeline options import GoogleCloudOptions
+    from geobeam.io import ShapefileSource 
+    from geobeam.fn import format_record, make_valid, filter_invalid
+    from datetime import datetime
+
+    pipeline_options = PipelineOptions([
+        '--experiments', 'use_beam_bq_sink',
+    ] + pipeline_args)
+
+    pipeline_options.view_as(GoogleCloudOptions).job_name = "geobeam-ipal-" \
+            + datetime.now().strftime("%Y-%m-%d-%H-%M-%S") 
+    pipeline options.view_as(SetupOptions).save_main_session = True
+
+    with beam.Pipeline(options=pipeline_options) as p:
+        (p
+         | beam.io.Read(ShapefileSource(known_args.gcs_url,
+             layer_name=known_args.layer_name))
+         | 'MakeValid' >> beam.Map(make_valid)
+         | 'FilterInvalid' >> beam.Filter(filter_invalid)
+         | 'FormatRecords' >> beam.Map(format_record)
+         | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(
+             beam_bigquery.TableReference(
+                 datasetId=known_args.dataset,
+                 tableId=known_args.table),
+             method=beam.io.WriteToBigQuery.Method.FILE_LOADS,
+             write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
+             create_disposition=beam.io.BigQueryDisposition.CREATE_NEVER))
+
+
+if __name__ == '__main__':
+    import logging
+    import argparse
+
+    logging.getLogger().setLevel(logging.INFO)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--gcs_url')
+    parser.add_argument('--dataset')
+    parser.add_argument('--table')
+    parser.add_argument('--layer_name')
+    parser.add_argument('--in_epsg', type=int, default=None)
+    known_args, pipeline_args = parser.parse_known_args()
+
+    run(pipeline_args, known_args)
