@@ -1,4 +1,4 @@
-FROM ger.io/dataflow-templates-base/python3-template-launcher-base
+FROM gcr.io/dataflow-templates-base/python3-template-launcher-base
 ARG WORKDIR=/dataflow/template
 RUN mkdir -p ${WORKDIR}
 WORKDIR $(WORKDIR}

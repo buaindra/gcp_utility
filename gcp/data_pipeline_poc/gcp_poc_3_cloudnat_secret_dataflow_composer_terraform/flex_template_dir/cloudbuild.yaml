@@ -1,0 +1,16 @@
+steps:
+- name: gcr.io/cloud-builders/gcloud
+  id: Build Docker Image
+  args: ['builds', 'submit', '--tag', 'gcr.10/${_PROJECT_ID}/${_IMAGE_NAME}:${_IMAGE_TAG}', './flex_template/']
+  waitFor: ['-']
+- name: gcr.io/cloud-builders/gcloud
+  args: ['beta',
+         'dataflow',
+		 'flex-template,
+		 'build',
+		 'gs://${_BUCKET_NAME}/dataflow_templates/api_to_bq_flex_template.json',
+		 '--image=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_IMAGE_TAG}',
+		 '--sdk-language=PYTHON',
+		 '--metadata-file=flex_template/metadata.json'
+  ]
+  waitFor: ['Build Docker Image")
